@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xpath-default-namespace="http://www.tei-c.org/ns/1.0"
     exclude-result-prefixes="xs"
-    xmlns="http://www.w3.org/1999/xhtml">
+    xmlns="http://www.w3.org/2000/svg">
+    
+    <xsl:output method="html" indent="yes"/> 
     
     <html>
         <head>
@@ -12,12 +13,15 @@
         <body>
             <xsl:template match="/">
                 
-                <xsl:output method="xml" indent="yes"/>
-                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                
+                
+                <svg width="100%" height="100%">
+                    
+                    <xsl:apply-templates select="//answer[@n=2]"/>
                     
                     <g transform="translate(50, 250)">
                         <text x="60" y="-150" text-anchor="middle" font-size="20px" font-family="Courier New">Male VS Female</text>
-                        <xsl:apply-templates select="//answer"/>
+                        
                         <line x1="0" x2="0" y1="0" y2="-125" stroke="black" stroke-width="2"/>
                         <line x1="-1" x2="50" y1="0" y2="0" stroke="black" stroke-width="2"/>
                         <line x1="-1" x2="50" y1="-125" y2="-125" stroke="black" stroke-width="2"/>
@@ -76,17 +80,19 @@
                         
                         <text x="20" y="10" text-anchor="middle" font-size="16px" font-family="Courier New">Male</text>
                         <text x="40" y="10" text-anchor="middle" font-size="16px" font-family="Courier New">Female</text>
+                        
+                        
                     </g>
                 </svg>
             </xsl:template>
         </body>
     </html>
     
-    <xsl:template match="answer">
+    <xsl:template match="answer[@n=2]">
         <!--<xsl:variable name="xInt" select="20"/>-->
         <xsl:variable name="yInt" select="5"/>
-        <xsl:variable name="yPos1" select="(count(answer[@n='2'][contains(., 'Male')])) * $yInt"/>
-        <xsl:variable name="yPos2" select="(count(answer[@n='2'][contains(., 'Female')])) * $yInt"/>
+        <xsl:variable name="yPos1" select="(count(.[contains(., 'Male')])) * $yInt"/>
+        <xsl:variable name="yPos2" select="(count(.[contains(., 'Female')])) * $yInt"/>
         <!--<xsl:variable name="xPos" select="(count(//rdg/@wit))*$xInt"/>-->
         
         <line x1="20" x2="20" y1="0" y2="-{$yPos1}" stroke="#FF8336" stroke-width="40"/>
