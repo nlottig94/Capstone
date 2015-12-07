@@ -8,6 +8,8 @@
     <xsl:output method="xml" indent="yes"/>
     
     <xsl:template match="/">
+        <!--ebb: The above line was beneath your HTML root element, 
+        which caused the main trouble in your output!-->
    <!-- <html>
         <head>
             <title>Capstone Graph 1</title>
