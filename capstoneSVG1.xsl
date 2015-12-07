@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xpath-default-namespace="http://www.w3.org/2001/XMLSchema"
     exclude-result-prefixes="xs"
     xmlns="http://www.w3.org/2000/svg">
+
+    <xsl:output method="xml" indent="yes"/>
     
-    <xsl:output method="html" indent="yes"/> 
-    
-    <html>
+    <xsl:template match="/">
+   <!-- <html>
         <head>
             <title>Capstone Graph 1</title>
         </head>
-        <body>
-            <xsl:template match="/">
-                
-                
+        <body>-->
+        <!--2015- 12-06 ebb: Build your HTML page separately to house your SVG, and be sure to use our
+            usual top lines:
+            <!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+You want these at the top, and no XML declaration line, and then embed your SVG code 
+in the body of your HTML file. 
+            -->
                 
                 <svg width="100%" height="100%">
                     
@@ -84,9 +92,10 @@
                         
                     </g>
                 </svg>
-            </xsl:template>
-        </body>
-    </html>
+            
+        <!--</body>
+    </html>-->
+    </xsl:template>
     
     <xsl:template match="answer[@n=2]">
         <!--<xsl:variable name="xInt" select="20"/>-->
@@ -98,5 +107,4 @@
         <line x1="20" x2="20" y1="0" y2="-{$yPos1}" stroke="#FF8336" stroke-width="40"/>
         <line x1="40" x2="40" y1="0" y2="-{$yPos2}" stroke="#FF8336" stroke-width="40"/>
     </xsl:template>
-    
 </xsl:stylesheet>
